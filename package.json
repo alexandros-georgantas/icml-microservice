@@ -1,0 +1,51 @@
+{
+  "name": "@coko/icml",
+  "version": "1.0.0",
+  "description": "Service that converts an HTML file into ICML",
+  "main": "server/index.js",
+  "scripts": {
+    "cz": "git-cz",
+    "migrate": "pubsweet migrate",
+    "server": "pubsweet start:server",
+    "release": "standard-version",
+    "create:client": "createServiceClient",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.coko.foundation/cokoapps/icml"
+  },
+  "keywords": [
+    "pubsweet",
+    "pubsweet-server",
+    "coko"
+  ],
+  "author": "Alexandros Georgantas",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@coko/server": "^1.4.1",
+    "@coko/service-auth": "^1.1.1",
+    "config": "^3.3.2",
+    "fs-extra": "^9.0.1",
+    "multer": "^1.4.2",
+    "winston": "2",
+    "winston-daily-rotate-file": "^3.2.1"
+  },
+  "devDependencies": {
+    "@coko/lint": "^0.0.2",
+    "standard-version": "^7.1.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
