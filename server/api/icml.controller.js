@@ -1,5 +1,5 @@
 // const logger = require('@pubsweet/logger')
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const { authenticate } = require('@coko/service-auth')
 
@@ -37,6 +37,10 @@ const conversionHandler = async (req, res) => {
     res.writeHead(200, {
       'Content-Type': 'application/octet-stream',
       'Content-Disposition': `attachment; filename=${name}.icml`,
+    })
+    res.on('finish', async () => {
+      logger.info(`removing file ${outputFile}`)
+      await fs.remove(outputFile)
     })
     fs.createReadStream(outputFile).pipe(res)
   } catch (e) {
