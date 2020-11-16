@@ -1,10 +1,10 @@
-// const logger = require('@pubsweet/logger')
+const { logger } = require('@coko/server')
 const fs = require('fs-extra')
 const path = require('path')
 const { authenticate } = require('@coko/service-auth')
+const { exec } = require('child_process')
 
 const { uploadHandler } = require('./helpers')
-const { exec } = require('child_process')
 
 const conversionHandler = async (req, res) => {
   try {

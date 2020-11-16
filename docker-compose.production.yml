@@ -2,11 +2,10 @@ version: '2'
 
 services:
   epub-checker:
-    build: 
+    build:
       context: .
-      dockerfile: ./Dockerfile
-    restart: always
-    ports: 
+      dockerfile: ./Dockerfile.production
+    ports:
       - ${SERVER_PORT:-3050}:3000
     environment:
       - PUBSWEET_SECRET=${PUBSWEET_SECRET:-dev_secret}
