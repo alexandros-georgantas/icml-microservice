@@ -1,6 +1,7 @@
 FROM pandoc/core
 
-RUN apk update && apk add --no-cache nodejs yarn git
+RUN apk update && apk add --no-cache ranger vim bash coreutils nodejs yarn git
+
 RUN addgroup -S node && adduser -S node -G node
 
 WORKDIR /home/node/icml
@@ -15,5 +16,3 @@ COPY --chown=node:node yarn.lock ./yarn.lock
 RUN yarn
 
 COPY --chown=node:node . .
-
-RUN chmod +x ./scripts/wait-for-it.sh

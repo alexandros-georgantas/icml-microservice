@@ -16,6 +16,6 @@ RUN yarn
 
 COPY --chown=node:node . .
 
-RUN chmod +x ./scripts/wait-for-it.sh
+ENTRYPOINT ["sh", "./scripts/setupProdServer.sh"]
 
-ENTRYPOINT . scripts/startServer.sh
+CMD ["node", "./server/startServer.js"]
