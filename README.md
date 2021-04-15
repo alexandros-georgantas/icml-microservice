@@ -48,5 +48,5 @@ All the above are required
 
 ## Creating client's credentials
 
-When the service is up by executing `docker exec -it <name_of_the_epubchecker_server_container> yarn create:client`.  
+When the service is up by executing `docker exec -it <name_of_the_icml_server_container> yarn create:client`.  
 The above will produce a valid pair of clientId and clientSecret
