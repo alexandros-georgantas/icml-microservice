@@ -1,4 +1,4 @@
-FROM pandoc/core
+FROM pandoc/core:2.19.1-alpine
 
 RUN apk update && apk add --no-cache bash nodejs yarn git
 RUN addgroup -S node && adduser -S node -G node

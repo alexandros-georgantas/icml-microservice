@@ -7,18 +7,27 @@ const { exec } = require('child_process')
 const { uploadHandler } = require('./helpers')
 
 const conversionHandler = async (req, res) => {
+  if (req.fileValidationError) {
+    return res.status(400).json({ msg: req.fileValidationError })
+  }
+  if (!req.file) {
+    return res.status(400).json({ msg: 'HTML file is not included' })
+  }
+  const { path: filePath } = req.file
+  const filename = path.basename(filePath)
+  const deconstructedFilename = filename.split('.')
+  const name = deconstructedFilename[0]
+  const outputFile = `temp/${name}.icml`
+
+  req.on('error', async err => {
+    logger.error(err.message)
+    return fs.remove(outputFile)
+  })
+  res.on('finish', async () => {
+    logger.info(`removing file ${outputFile}`)
+    await fs.remove(outputFile)
+  })
   try {
-    if (req.fileValidationError) {
-      return res.status(400).json({ msg: req.fileValidationError })
-    }
-    if (!req.file) {
-      return res.status(400).json({ msg: 'HTML file is not included' })
-    }
-    const { path: filePath } = req.file
-    const filename = path.basename(filePath)
-    const deconstructedFilename = filename.split('.')
-    const name = deconstructedFilename[0]
-    const outputFile = `temp/${name}.icml`
     await new Promise((resolve, reject) => {
       exec(
         `pandoc -s ${filePath} -o ${outputFile}`,
@@ -38,10 +47,7 @@ const conversionHandler = async (req, res) => {
       'Content-Type': 'application/octet-stream',
       'Content-Disposition': `attachment; filename=${name}.icml`,
     })
-    res.on('finish', async () => {
-      logger.info(`removing file ${outputFile}`)
-      await fs.remove(outputFile)
-    })
+
     fs.createReadStream(outputFile).pipe(res)
   } catch (e) {
     throw new Error(e)
