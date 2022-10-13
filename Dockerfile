@@ -1,6 +1,7 @@
-FROM pandoc/core:2.19.1-alpine
+FROM pandoc/core:2.17
 
 RUN apk update && apk add --no-cache bash nodejs yarn git
+
 RUN addgroup -S node && adduser -S node -G node
 
 WORKDIR /home/node/icml
