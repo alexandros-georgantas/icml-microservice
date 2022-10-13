@@ -1,6 +1,6 @@
 {
   "name": "@coko/icml",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Service that converts an HTML file into ICML",
   "main": "server/index.js",
   "scripts": {
