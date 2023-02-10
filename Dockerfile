@@ -1,4 +1,4 @@
-FROM pandoc/core:2.17
+FROM pandoc/core:3.0.1
 
 RUN apk update && apk add --no-cache bash nodejs yarn git
 
