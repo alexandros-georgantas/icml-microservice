@@ -1,6 +1,6 @@
 FROM pandoc/core:3.0.1
 
-RUN apk update && apk add --no-cache bash nodejs yarn git
+RUN apk update && apk add --no-cache bash nodejs-current yarn git
 
 RUN addgroup -S node && adduser -S node -G node
 

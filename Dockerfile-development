@@ -1,6 +1,6 @@
-FROM pandoc/core:3.0.1
+FROM pandoc/core:3.1.1.0
 
-RUN apk update && apk add --no-cache ranger vim bash nodejs yarn git
+RUN apk update && apk add --no-cache ranger vim bash nodejs-current yarn git
 
 RUN addgroup -S node && adduser -S node -G node
 
